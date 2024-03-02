@@ -1,17 +1,6 @@
-import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherGraphiqueAvis } from "./avis.js";
-
 // Récupération des pièces depuis le fichier JSON
-fetch('pieces-autos.json')
-  .then(response => response.json())
-  .then(data => {
-    // Utiliser les données chargées ici
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Erreur lors du chargement du fichier JSON :', error);
-  });
-
-ajoutListenerEnvoyerAvis()
+const reponse = await fetch('pieces-autos.json');
+const pieces = await reponse.json();
 
 function genererPieces(pieces){
     for (let i = 0; i < pieces.length; i++) {
@@ -34,29 +23,24 @@ function genererPieces(pieces){
         descriptionElement.innerText = article.description ?? "Pas de description pour le moment.";
         const stockElement = document.createElement("p");
         stockElement.innerText = article.disponibilite ? "En stock" : "Rupture de stock";
-        //Code ajouté
-        const avisBouton = document.createElement("button");
-        avisBouton.dataset.id = article.id;
-        avisBouton.textContent = "Afficher les avis";
         
         // On rattache la balise article a la section Fiches
         sectionFiches.appendChild(pieceElement);
+        // On rattache l’image à pieceElement (la balise article)
         pieceElement.appendChild(imageElement);
         pieceElement.appendChild(nomElement);
         pieceElement.appendChild(prixElement);
         pieceElement.appendChild(categorieElement);
+        //Ajout des éléments au DOM pour l'exercice
         pieceElement.appendChild(descriptionElement);
         pieceElement.appendChild(stockElement);
-        //Code aJouté
-        pieceElement.appendChild(avisBouton);
     
      }
-     ajoutListenersAvis();
 }
 
 genererPieces(pieces);
 
- //gestion des boutons 
+ //gestion des bouttons 
 const boutonTrier = document.querySelector(".btn-trier");
 
 boutonTrier.addEventListener("click", function () {
@@ -155,5 +139,3 @@ inputPrixMax.addEventListener('input', function(){
     document.querySelector(".fiches").innerHTML = "";
     genererPieces(piecesFiltrees);  
 })
-
-await afficherGraphiqueAvis();
