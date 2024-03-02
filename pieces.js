@@ -1,7 +1,7 @@
 import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherGraphiqueAvis } from "./avis.js";
 
 // Récupération des pièces depuis le fichier JSON
-fetch('piece-auto.json')
+fetch('pieces-autos.json')
   .then(response => response.json())
   .then(data => {
     // Utiliser les données chargées ici
