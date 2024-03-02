@@ -6,7 +6,7 @@ export async function ajoutListenersAvis() {
             const id = event.target.dataset.id;
             try {
                 // Charger les données depuis le fichier JSON local
-                const reponse = await fetch('piece-auto.json');
+                const reponse = await fetch('pieces-autos.json');
                 const avis = await reponse.json();
 
                 // Filtrer les avis pour la pièce spécifique
