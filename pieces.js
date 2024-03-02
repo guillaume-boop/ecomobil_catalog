@@ -1,9 +1,16 @@
 import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherGraphiqueAvis } from "./avis.js";
 
 // Récupération des pièces depuis le fichier JSON
-const reponse = await fetch('http://localhost:8081/pieces/');
-const pieces = await reponse.json();
-// on appel la fonction pour ajouter le listener au formulaire
+fetch('piece-auto.json')
+  .then(response => response.json())
+  .then(data => {
+    // Utiliser les données chargées ici
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Erreur lors du chargement du fichier JSON :', error);
+  });
+
 ajoutListenerEnvoyerAvis()
 
 function genererPieces(pieces){
